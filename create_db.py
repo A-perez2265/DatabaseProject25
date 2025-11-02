@@ -24,30 +24,30 @@ CREATE TABLE IF NOT EXISTS Subjects (
     subject_name VARCHAR(100) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXIST Title_Subjects (
+CREATE TABLE IF NOT EXISTS Title_Subjects (
     show_id VARCHAR(10) NOT NULL,
     subject_id INTEGER NOT NULL,
-    PRIMARY KEY = (show_id, subject_id)
-    FOREIGN KEY (show_id) REFERENCES Titles.show_id
-    FOREIGN KEY (subject_id) REFERENCES Subjects.subject_id
+    PRIMARY KEY (show_id, subject_id),
+    FOREIGN KEY (show_id) REFERENCES Titles(show_id),
+    FOREIGN KEY (subject_id) REFERENCES Subjects(subject_id)
 );
 
-CREATE TABLE IF NOT EXIST Watchlists (
-    List_id INTEGER PRIMARY KEY,
-    List_name VARCHAR(100) NOT NULL UNIQUE,
-    teacher_name VARCHAR(100) NOT NULL
+CREATE TABLE IF NOT EXISTS Watchlists (
+    list_id INTEGER PRIMARY KEY,
+    list_name VARCHAR(100) NOT NULL UNIQUE,
+    teacher_name VARCHAR(100) NOT NULL,
     created_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXIST Watchlist_Items (
-    List_id INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS Watchlist_Items (
+    list_id INTEGER NOT NULL,
     show_id VARCHAR(10) NOT NULL,
-    PRIMARY KEY = (List_id, show_id)
-    FOREIGN KEY (List_id) REFERECES Watchlist.List_id
-    FOREIGN KEY (show_id) REFERENCES Titles.show_id
+    PRIMARY KEY (list_id, show_id),
+    FOREIGN KEY (list_id) REFERENCES Watchlist(list_id),
+    FOREIGN KEY (show_id) REFERENCES Titles(show_id)
 );
 """
-def create_databases():
+def create_database():
     conn = None
     try:#connect to db
         conn = sqlite3.connect(DATABASE_FILE)
@@ -64,8 +64,8 @@ def create_databases():
     finally:
         if conn:
             conn.close()
-            print("Connection Closed")
+            
 
 if __name__ == "__main__":
-    create_databases()
+    create_database()
     
