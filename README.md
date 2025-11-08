@@ -9,6 +9,10 @@ Once you have cloned this repo onto your local machine you can run these command
 3. populate the netflix and IMDB table with
    "import_merged_to_db.py"
 
+4. you also need this on your local computer its too big to push to github,
+ title.basics.tsv
+download it here https://datasets.imdbws.com/
+
 **YOU now have all the tables**
 
 you'll have to set up a **DATABASE CONNECTION** if youre using vs code:
