@@ -1,5 +1,7 @@
 import tkinter as tk
-import sqlite3 
+import sqlite3
+from tkinter import ttk # for styling
+import os
 from tkinter import messagebox # for displaying message boxes
 from Crud_components import create_watchlist, read_all_watchlist # imports funcs from crud_components.py
 
