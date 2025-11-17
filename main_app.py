@@ -178,17 +178,8 @@ def run_selected_query():
             
         # --- QUERY 4 ---
         elif selected_option == "Query 4: Find Average Rating Per Year":
-            #age_rating = param2_age_entry.get()
-            #duration = param2_duration_entry.get()
-
-            #if not age_rating or not duration:
-            #    messagebox.showwarning("Input Error", "Please enter an Age Rating and a Max Duration.")
-            #    conn.close()
-            #    return
                 
             try:
-                #params = (age_rating, int(duration))
-                
                 
                 query = """
                     SELECT n.release_year, AVG(n.averageRating)
@@ -201,6 +192,31 @@ def run_selected_query():
                 conn.close()
                 return
         
+        # --- QUERY 5 ---
+        elif selected_option == "Query 5: Find Best Movies Per Year":
+                
+            try:
+                
+                query = """
+                    SELECT title, averageRating, release_year
+                    FROM (
+                        SELECT 
+                            n.*,
+                            ROW_NUMBER() OVER (
+                                PARTITION BY release_year 
+                                ORDER BY averageRating DESC
+                            ) AS rn
+                        FROM Netflix_IMDB AS n
+                        WHERE averageRating IS NOT NULL
+                    ) ranked
+                    WHERE rn = 1
+                    ORDER BY release_year;
+                """
+            except ValueError:
+                messagebox.showwarning("Input Error", "Max Duration must be a number (e.g., 50).")
+                conn.close()
+                return
+
         # --- NO QUERY SELECTED ---
         else:
             messagebox.showwarning("Warning", "Please select a valid query.")
@@ -294,7 +310,8 @@ query_options = [
     "Query 1: Find by Academic Keyword (in Description)",
     "Query 2: Find by Genre (Top-Rated)",
     "Query 3: Find Films by Age Rating & Duration",
-    "Query 4: Find Average Rating Per Year"
+    "Query 4: Find Average Rating Per Year",
+    "Query 5: Find Best Movies Per Year"
 ]
 query_combo = ttk.Combobox(query_frame, values=query_options, width=45, state="readonly")
 query_combo.pack(pady=5)
