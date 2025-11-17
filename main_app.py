@@ -190,7 +190,9 @@ def run_selected_query():
                     ORDER BY n.release_year DESC;
                 """
             
-        
+        # --- QUERY 5 ---
+        elif selected_option == "Query 5: Find Best Movies Per Year":
+
         # --- NO QUERY SELECTED ---
         else:
             messagebox.showwarning("Warning", "Please select a valid query.")
@@ -337,6 +339,10 @@ param3_rating_entry.insert(0, "7.0")
 # Parameters for Query 4
 param_frame_q4 = ttk.Frame(query_frame)
 tk.Label(param_frame_q4, text="This query takes no parameters.").pack(pady=10)
+
+# Parameters for Query 5
+param_frame_q5 = ttk.Frame(query_frame)
+tk.Label(param_frame_q5, text="This query takes no parameters.").pack(pady=10)
 
 # --- Run Button ---
 tk.Button(query_frame, text="Run Selected Query", command=run_selected_query).pack(pady=10)
