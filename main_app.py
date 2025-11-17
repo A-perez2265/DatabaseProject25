@@ -284,7 +284,8 @@ query_options = [
     "Query 1: Find by Academic Keyword (in Description)",
     "Query 2: Find by Genre (Top-Rated)",
     "Query 3: Find Films by Age Rating & Duration",
-    "Query 4: Find Average Rating Per Year"
+    "Query 4: Find Average Rating Per Year",
+    "Query 5: Find Best Movies Per Year"
 ]
 query_combo = ttk.Combobox(query_frame, values=query_options, width=45, state="readonly")
 query_combo.pack(pady=5)
