@@ -52,7 +52,7 @@ def on_query_select(event):
     param_frame_q1.pack_forget()
     param_frame_q2.pack_forget()
     param_frame_q3.pack_forget()
-    #param_frame_q4.pack_forget()
+    param_frame_q4.pack_forget()
     
     selected_query = query_combo.get()
     
@@ -66,8 +66,8 @@ def on_query_select(event):
     elif selected_query == "Query 3: Find Films by Age Rating & Duration":
         param_frame_q2.pack(pady=5)  
 
-    #elif selected_query == "Query 4: Find Average Rating Per Year":
-    #    param_frame_q4.pack(pady=5)  
+    elif selected_query == "Query 4: Find Average Rating Per Year":
+        param_frame_q4.pack(pady=5)  
 
 
 # run the selected query
@@ -178,28 +178,18 @@ def run_selected_query():
             
         # --- QUERY 4 ---
         elif selected_option == "Query 4: Find Average Rating Per Year":
-            #age_rating = param2_age_entry.get()
-            #duration = param2_duration_entry.get()
-
-            #if not age_rating or not duration:
-            #    messagebox.showwarning("Input Error", "Please enter an Age Rating and a Max Duration.")
-            #    conn.close()
-            #    return
-                
-            try:
-                #params = (age_rating, int(duration))
-                
                 
                 query = """
-                    SELECT n.release_year, AVG(n.averageRating)
+                    SELECT 
+                        n.release_year, 
+                        ROUND(AVG(n.averageRating), 2) AS avg_rating,
+                        COUNT(*) AS title_count
                     FROM Netflix_IMDB AS n
                     WHERE n.averageRating IS NOT NULL
-                    GROUP BY n.release_year;
+                    GROUP BY n.release_year
+                    ORDER BY n.release_year DESC;
                 """
-            except ValueError:
-                messagebox.showwarning("Input Error", "Max Duration must be a number (e.g., 50).")
-                conn.close()
-                return
+            
         
         # --- NO QUERY SELECTED ---
         else:
@@ -344,7 +334,8 @@ param3_rating_entry.grid(row=1, column=1, padx=5)
 param3_rating_entry.insert(0, "7.0")
 
 # Parameters for Query 4
-param_frame_q3 = ttk.Frame(query_frame)
+param_frame_q4 = ttk.Frame(query_frame)
+tk.Label(param_frame_q4, text="This query takes no parameters.").pack(pady=10)
 
 # --- Run Button ---
 tk.Button(query_frame, text="Run Selected Query", command=run_selected_query).pack(pady=10)
