@@ -200,6 +200,7 @@ def run_selected_query():
                         release_year, 
                         averageRating, 
                         numVotes,
+                        genres,
                         ROW_NUMBER() OVER(
                             PARTITION BY release_year 
                             ORDER BY averageRating DESC, numVotes DESC
@@ -214,7 +215,8 @@ def run_selected_query():
                     release_year, 
                     title,
                     averageRating, 
-                    numVotes
+                    numVotes,
+                    genres
                 FROM RankedMovies
                 WHERE rank = 1
                 ORDER BY release_year DESC;
