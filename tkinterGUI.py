@@ -189,7 +189,7 @@ def view_all_titles():
     win.geometry("900x500")
 
     # Search bar
-    tk.Label(win, text="Search by title, year, name:").pack(pady=5) # label for search bar
+    tk.Label(win, text="Search by title or release year:").pack(pady=5) # label for search bar
     search_var = tk.StringVar() # variable to hold search text
     tk.Entry(win, textvariable=search_var, width=50).pack(pady=5) # entry for search bar
 
