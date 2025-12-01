@@ -567,7 +567,16 @@ all_subjects_list = fetch_all_subjects()
 root = tk.Tk()
 root.title("Netflix Watchlist Manager")
 
-main_frame = tk.Frame(root)
+notebook = ttk.Notebook(root) # adding tabs
+notebook.pack(fill="both", expand=True, padx=10, pady=10)
+
+tab_watchlists = ttk.Frame(notebook)
+tab_queries = ttk.Frame(notebook)
+
+notebook.add(tab_watchlists, text="Watchlists") # first tab
+notebook.add(tab_queries, text="Database Queries") # second tab
+
+main_frame = tk.Frame(tab_watchlists)
 main_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
 # left frame for watchlist management
@@ -649,9 +658,7 @@ tk.Button(right_btn_frame, text="View All Titles", command=view_all_titles, widt
 # DATABASE QUERY SECTION        #
 #===============================#
 
-ttk.Separator(main_frame, orient='horizontal').pack(fill='x', pady=10)
-
-query_section = tk.Frame(main_frame)
+query_section = tk.Frame(tab_queries) # removed separator to make tabs
 query_section.pack(fill="both", expand=True, padx=10, pady=10)
 
 tk.Label(query_section, text="Educational Content Finder - Database Queries", font=("tkDefaultFont", 12, "bold")).pack(pady=5)
