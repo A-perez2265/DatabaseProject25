@@ -1,6 +1,7 @@
 The file to run the program lives in the file 'testfinal.py' 
+If you have the netflix_db.db you should be able to run this file and explore the program
 
-**First time use no database**
+**if missing netflix_db.db ,To create the database**
 
 Once you have cloned this repo onto your local machine you can run these commands in your terminal in order 
 
