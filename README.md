@@ -1,3 +1,7 @@
+The file to run the program lives in the file 'testfinal.py' 
+
+**First time use no database**
+
 Once you have cloned this repo onto your local machine you can run these commands in your terminal in order 
 
 1. Creates the db with the appropraite tables 
